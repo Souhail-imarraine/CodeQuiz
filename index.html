@@ -24,6 +24,9 @@
         </nav>
     </header>
     <section>
+        <div id="wait"></div>
+    </section>
+    <section>
         <div class="container">
             <div>
                 <div>
@@ -44,7 +47,7 @@
         
         <div>
             <div class="filter">
-                <select name="" id="">
+                <select id="filterId" onchange="filterage()">
                     <option value="choix">choix...</option>
                     <option value="Facile">Facile</option>
                     <option value="Moyen">Moyen</option>
@@ -52,36 +55,61 @@
                 </select>
             </div>
             <div class="game_container">
-                <div class="card_quiz"> 
-                    <button><a href="Quiz.html">play now</a></button>
-                    <h1>QUIZE 1</h1>
-                    <p>5min</p>
+
+                <div class="container-game_one">
+                    <div class="card_quiz" data-level="Facile"> 
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 1</h1>
+                        <p class="timeAQuiz">5min</p>
+                        <div class="Niveau_difficulte">
+                            <h1 >Facille</h1>
+                        </div>
+                    </div>
+                    <div class="card_quiz" data-level="Moyen">
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 2</h1>
+                        <p class="timeAQuiz">10min</p>
+                        <div class="Niveau_difficulte">
+                            <h1>Moyen</h1>
+                        </div>
+                    </div>
+                    <div class="card_quiz" data-level="Difficile">
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 3</h1>
+                        <p class="timeAQuiz">20min</p>
+                        <div class="Niveau_difficulte">
+                            <h1>Difficile</h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="card_quiz">
-                    <button>play now</button>
-                    <h1>QUIZE 2</h1>
-                    <p>10min</p>
-                </div>
-                <div class="card_quiz">
-                    <button>play now</button>
-                    <h1>QUIZE 3</h1>
-                    <p>20min</p>
-                </div>
-                <div class="card_quiz">
-                    <button>play now</button>
-                    <h1>QUIZE 3</h1>
-                    <p>20min</p>
-                </div>
-                <div class="card_quiz">
-                    <button>play now</button>
-                    <h1>QUIZE 3</h1>
-                    <p>20min</p>
-                </div>
-                <div class="card_quiz">
-                    <button>play now</button>
-                    <h1>QUIZE 4</h1>
-                    <p>3min</p>
-                </div>
+
+                <div class="container_game_two">
+                    <div class="card_quiz" data-level="Facile">
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 3</h1>
+                        <p>20min</p>
+                        <div class="Niveau_difficulte">
+                            <h1>Facille</h1>
+                        </div>
+                    </div>
+                    <div class="card_quiz" data-level="Moyen">
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 3</h1>
+                        <p>20min</p>
+                        <div class="Niveau_difficulte">
+                            <h1>Moyen</h1>
+                        </div>
+                    </div>
+                    <div class="card_quiz" data-level="Difficile">
+                        <button class="btn_star">play now</button>
+                        <h1>QUIZE 4</h1>
+                        <p>3min</p>
+                        <div class="Niveau_difficulte">
+                            <h1>Difficile</h1>
+                        </div>
+                    </div>
+                </div> 
+
             </div>
         </div>
     </section>
@@ -101,11 +129,11 @@
         </div>
         <hr>
         <div class="Copyright">
-            <p>&copy; Copyright  2024 Souhail imarraine | All rights reserved</p>
+            <p>&copy; Copyright 2024 Souhail imarraine | All rights reserved </p>
         </div>
-
     </footer>
-
+    <script src="data_Quizes.js"></script>
+    <script src="Quiz.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

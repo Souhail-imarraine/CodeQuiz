@@ -25,19 +25,77 @@
     </header>
 
     <section>
-        <div>
+        <div class="container_quizes">
             <div class="Quizes">
-                <h2>0</h2>
+                <div>
+                    <h2 id="count">Score:0/5</h2>
+                </div>
+                <div>
+                    <p class="timing"></p>
+                </div>
+                <div class="Question">
+                    <h3 class="QuizJson">Quel langage est principalement utilisé pour le développement d'applications web côté serveur ?</h3>
+                </div>
+                <div class="progress_prent" >
+                    <div class="porsontage_color"style="width: 0%; background: red;">
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="true_answore">the answore is ["bla" or "bla", "bla", "souhail"]</h3>
             </div>
             <div class="answor_container">
-                <div class="answor one"></div>
-                <div class="answor two"></div>
-                <div class="answor three"></div>
-                <div class="answor four"></div>
+                <!-- <button class="answor"></button>
+                <button class="answor"></button>
+                <button class="answor"></button>
+                <button class="answor"></button> -->
+            </div>
+            <div class="next">
+                <button class="btn_next">Next Quize</button>
             </div>
         </div>
     </section>
+    <section class="module">
+        <div class="modal-container" id="modal-container">
+            <h1>My score</h1>
+            <div class="my_resulta">
+                <div>
+                    <h2>Nombre de bonnes réponses</h2>
+                    <h3 class="nomber_bonne_reponse">5/10</h3>
+                </div>
+                <div>
+                    <h2>Pourcentage de réussite</h2>
+                    <h3 class="pourcentage">30%</h3>
+                </div>
+                <div>
+                    <h2>Temps total</h2>
+                    <h3 class="TempsTotal">2min : 30s</h3>
+                </div>
+                <button class="btn_modul">Save</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container_footer">
+            <div>
+                <img src="images/quiz-2074324_1280.png" alt="">
+            </div>
+            <div class="social_media">
+                <a href="#"><i class="fa-brands fa-facebook" style="color: #0068b8;"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" style="color: #ff9ee5;"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter" style="color: #70c1ff;"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin" style="color: #74C0FC;"></i></a>
+            </div>
+        </div>
+        <hr>
+        <div class="Copyright">
+            <p>&copy; Copyright  2024 Souhail imarraine | All rights reserved</p>
+        </div>
+    </footer>
 
+    <script src="data_Quizes.js"></script>
     <script src="Quiz.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
