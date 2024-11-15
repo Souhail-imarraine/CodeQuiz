@@ -94,7 +94,7 @@ function filterage() {
 const btnStar = document.querySelectorAll(".btn_star");
 btnStar.forEach((btn) => {
   btn.addEventListener("click", () => {
-    window.location.href = "/Quiz.html";
+    window.location.href = "Quiz.html";
     btn.classList.add("active");
   });
 });
