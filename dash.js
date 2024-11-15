@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
             quizData.push(newQuiz);
 
             localStorage.setItem("quizInfo", JSON.stringify(quizData));
-            window.location.href = "Dashboard.html"
+            window.location.href = "/Dashboard.html"
         });
     }
 });
