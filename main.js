@@ -41,8 +41,6 @@ startQuiz.forEach((userChoice) => {
   userChoice.addEventListener("click", () => {
     let category = userChoice.getAttribute("data-categorie");
     quizdata = data[category];
-    console.log(quizdata);
-
     localStorage.setItem("quizData", JSON.stringify(quizdata));
   });
 });
@@ -94,7 +92,7 @@ function filterage() {
 const btnStar = document.querySelectorAll(".btn_star");
 btnStar.forEach((btn) => {
   btn.addEventListener("click", () => {
-    window.location.href = "Quiz.html";
+    window.location.href = "/Quiz.html";
     btn.classList.add("active");
   });
 });
