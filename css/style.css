@@ -116,6 +116,8 @@ a {
     left: 70px;
 }
 
+
+
 .Niveau_difficulte {
     height: 50px;
     width: 100%;
@@ -138,13 +140,6 @@ a {
     height: 100%;
 }
 
-/* .black_hover:hover{
-    background-color: rgba(189, 11, 11, 0.511);
-    position: absolute;
-    width: 79%;
-    height: 200px;
-    display: inline-block;
-} */
 
 .card_quiz img{
     width: 20em;
@@ -161,24 +156,84 @@ a {
     margin: auto;
 }
 
-.correct:not([correct]){
+.correct:not([correct]) {
     background-color: greenyellow;
     color: black;
+    border: 2px solid black;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-.correct:hover:not([correct]){
-    background-color: greenyellow;
-    color: black;
+
+.correct:hover:not([correct]) {
+    background: linear-gradient(45deg, greenyellow, limegreen);
+    color: white;
+    border: 2px solid limegreen;
+    box-shadow: 0 0 15px limegreen, 0 0 25px greenyellow;
+    transform: scale(1.2); 
+    transition: all 0.3s ease-in-out; 
 }
-.incorrect:not([incorrect]){
+
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 0 0 10px limegreen;
+    }
+    50% {
+        box-shadow: 0 0 20px limegreen;
+    }
+    100% {
+        box-shadow: 0 0 10px limegreen;
+    }
+}
+
+.correct:hover:not([correct])::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid limegreen;
+    border-radius: 5px;
+    animation: pulseBorder 1.5s infinite ease-in-out;
+    z-index: -1;
+}
+
+.incorrect:not([incorrect]) {
     background-color: rgb(255, 144, 144);
     color: black;
     cursor: no-drop;
-}
+    animation: incorrectShake 0.4s ease-in-out;
+  }
+
 .incorrect:hover:not([incorrect]){
     background-color: rgb(255, 144, 144);
     color: black;
     cursor: no-drop;
 }
+
+
+  
+
+@keyframes incorrectShake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  
 button.gray {
     background-color: #ccc;  /* Light gray background */
     color: #888;             /* Gray text */
@@ -190,11 +245,11 @@ button.gray {
     justify-content: center;
     flex-wrap: wrap;
 }
-.container_game_two {
+/* .container_game_two {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
+} */
 
 .card_quiz button{
     width: 320px;
@@ -444,7 +499,7 @@ hr {
 .btn_modul {
     background-color: #ced0ff;
         color: black;
-        width: 321px;
+        width: -webkit-fill-available;
         margin: 10px;
         height: 25px;
         border: 2px solid;
@@ -468,6 +523,21 @@ hr {
     color: #00844b;
     display: none;
 }
+.description {
+    /* display: none; */
+    width: 249px;
+    color: white;
+}
+.description:hover {
+    color: black;
+}
+
+.timeAQuiz{
+    color: rgb(255, 255, 255);
+    font-size: xx-large;
+}
+
+
 
 
 @media screen and (min-width: 320px ) and (max-width: 427px){
@@ -560,9 +630,6 @@ hr {
     .Question {
         text-align: center;
     }
-    .my_resulta {
-      flex-direction: column;
-    }
     .modal-container {
         height: 100vh;
     }
@@ -570,9 +637,19 @@ hr {
         width: 85%;
         font-size: xx-small;
         background-color: #e9ffa0;
+        height: fit-content;
+        flex-direction: column;
     }
-    
-    
+    .btn_modul {
+        background-color: #ced0ff;
+        color: black;
+        width: -webkit-fill-available;
+        margin: 10px;
+        height: 25px;
+        border: 2px solid;
+        height: 100%;
+        cursor: pointer;
+    }
 }
 
 @media screen and (max-width: 427px){
@@ -586,6 +663,7 @@ hr {
         width: 6rem;
     }
    
+   
 } 
 @media screen and (max-width: 768px){
     .Question {
@@ -597,7 +675,7 @@ hr {
     .btn_modul {
         background-color: #ced0ff;
         color: black;
-        width: 321px;
+        width: -webkit-fill-available;
         margin: 10px;
         height: 25px;
         border: 2px solid;

@@ -1,19 +1,25 @@
 let questionElement = document.querySelector('.QuizJson');
 let nextButton = document.querySelector('.btn_next');
 let answercontainer = document.querySelector('.answor_container');
+const true_answore = document.getElementById("explication");
 let currentQuestionIndex = 0;
 
 let score = 0;
 
+
+let dataQuizeJs = JSON.parse(localStorage.getItem("quizData")) || [];
+
+
+
 function updateQuestion() {
-    answercontainer.innerHTML = '';
-    if (currentQuestionIndex < data.length) {
-        questionElement.textContent = data[currentQuestionIndex].question;
-        let options = data[currentQuestionIndex].options;
-        let opLength = data[currentQuestionIndex].options.length;
-        
+    answercontainer.innerHTML = "";
+    if (currentQuestionIndex < dataQuizeJs.length) {
+        questionElement.textContent = dataQuizeJs[currentQuestionIndex].question;
+        let options = dataQuizeJs[currentQuestionIndex].options;
+        let opLength = dataQuizeJs[currentQuestionIndex].options.length;
+
         for (var i = 0; i < opLength; i++) {
-            if (data[currentQuestionIndex].type === "text") {
+            if (dataQuizeJs[currentQuestionIndex].type === "text") {
                 var inp = document.createElement("input");
                 answercontainer.style.gridTemplateColumns = "repeat(1, 1fr)";
                 inp.classList.add("input_ansower");
@@ -23,14 +29,13 @@ function updateQuestion() {
 
                 var correctAnswer = options[0];  
                 
-                // Input value
                 inp.addEventListener("change", () => {
                     var valueInputQuiz = inp.value.trim();
                     
                     if (valueInputQuiz === correctAnswer ) {     
                         score++;
                         inp.disabled = true;
-                        inp.style.backgroundColor = "lightgreen"; // Correct answer
+                        inp.style.backgroundColor = "lightgreen"; 
                         localStorage.setItem("score", score);
                     } else {
                         inp.style.backgroundColor = "red"; 
@@ -62,31 +67,33 @@ function updateQuestion() {
         });
     } else {
         document.querySelector(".modal-container").style.display = "flex";
-        document.querySelector(".container_quizes").innerHTML = "";
+        // document.querySelector(".container_quizes").innerHTML = "";
         document.querySelector(".container_quizes").style.minHeight = "710px";
     }
 }
+
+// ****************************************
 
 
 
 function handleAnswerClick(event) {
     if(event === null){
         document.querySelector(".modal-container").style.display = "flex";
-        document.querySelector(".container_quizes").innerHTML = "";
+        // document.querySelector(".container_quizes").innerHTML = "";
         document.querySelector(".container_quizes").style.minHeight = "710px";
 
-
-    }else{
-
+    }else {
+    
     let answerButtons = document.querySelectorAll('.answor');
     let selectedButton = event.target;
     let selectedOptionText = selectedButton.textContent;
-    let correctOption = data[currentQuestionIndex].options.find(option => option.correct);
+    let correctOption = dataQuizeJs[currentQuestionIndex].options.find(option => option.correct);
 
     let containerColorScore = document.querySelector('.porsontage_color');
 
-    let totalQuestions = data.length;
+    let totalQuestions = dataQuizeJs.length;
     let progressPerCorrectAnswer = 100 / totalQuestions;
+
 
     answerButtons.forEach((button) => {
         button.disabled = true;
@@ -95,10 +102,16 @@ function handleAnswerClick(event) {
     if (selectedOptionText === correctOption.text) {
         score++;
         localStorage.setItem("score", score);
-
         selectedButton.classList.add('correct');
     } else {
         selectedButton.classList.add('incorrect');
+        if (dataQuizeJs[currentQuestionIndex].type === "vrai/faux") {
+            true_answore.textContent = dataQuizeJs[currentQuestionIndex].explication;
+            true_answore.style.textAlign = "center"
+        }else {
+            true_answore.textContent = ""
+        }
+
 
         answerButtons.forEach(button => {
             if (button.textContent === correctOption.text) {
@@ -111,7 +124,7 @@ function handleAnswerClick(event) {
     containerColorScore.style.width = progressWidth + "%";
     count();
     }
-    
+
 }
 updateQuestion();
 
@@ -119,6 +132,7 @@ updateQuestion();
 // nextQuize btn
 function nextQuize(){
     nextButton.addEventListener('click', function () {
+        true_answore.textContent = ""
         currentQuestionIndex++;
         updateQuestion();
     });
@@ -130,7 +144,7 @@ nextQuize()
 
 // score 
 function count() {
-    document.getElementById('count').textContent = `Score: ${score}/${data.length}`;
+    document.getElementById('count').textContent = `Score: ${score}/${dataQuizeJs.length}`;
 }
 count();
 
@@ -138,7 +152,7 @@ count();
 // timing 30s
 
 function timing() {
-    let seconds = 120;  
+    let seconds = 20;  
     let timingElement = document.querySelector('.timing');
    
 
@@ -160,20 +174,23 @@ function timing() {
 timing();
 
 
+
+
+
 // ******************************* score *****************************
-let nomber_bonne_reponse = document.querySelector(".nomber_bonne_reponse"); 
 let myscore =  localStorage.getItem("score");
 function scoreQuizes() {
-    nomber_bonne_reponse.innerHTML = `${myscore}/${data.length}`;
-    window.localStorage.setItem("nomber_bonne_reponse", nomber_bonne_reponse);
+    let nomber_bonne_reponse = document.querySelector(".nomber_bonne_reponse"); 
+    nomber_bonne_reponse.innerHTML = `${myscore}/${dataQuizeJs.length}`;
+    window.localStorage.setItem("nomber_bonne_reponse", JSON.stringify(nomber_bonne_reponse));
 }
 scoreQuizes();
 
-//  Pourcentage
+//  Pourcentage 
 let pourcentage = document.querySelector(".pourcentage"); 
 
  function pourcentageQuize() {
-    let lenghtQuizes = data.length; 
+    let lenghtQuizes = dataQuizeJs.length; 
     pourcentage.innerHTML = (myscore/lenghtQuizes)*100 + "%";
     window.localStorage.setItem("pourcentage", pourcentage.innerHTML);
  }
@@ -181,13 +198,45 @@ let pourcentage = document.querySelector(".pourcentage");
 
 //  tempt total
 
-function tempTotalQuize(){
-    const TempsTotal = document.querySelector(".TempsTotal");
-    // TempTotal.innerHTML = 
-    //**her i want to write my code*/
-}
+// function tempTotalQuize(){
+//     const TempsTotal = document.querySelector(".TempsTotal");
+//     // TempTotal.innerHTML = 
+//     //**her i want to write my code*/
+// }
 
 // ********************************************************************
 
 
+
+const playAgain = document.getElementById("play_again");
+
+playAgain.addEventListener("click", () => {
+    document.querySelector(".modal-container").style.display = "none";
+    
+    score = 0;
+    currentQuestionIndex = 0;
+
+    localStorage.setItem("score", score);
+
+    true_answore.textContent = "";
+    
+    let dataQuizeJs = JSON.parse(localStorage.getItem("quizData")) || [];
+    
+    if (dataQuizeJs.length === 0) {
+        alert("No quiz data available. Please make sure quiz data is stored.");
+        return;
+    }
+
+    timing();
+    count();
+    updateQuestion();
+    pourcentageQuize();
+});
+
+
+const back_btn = document.getElementById("back_btn");
+
+back_btn.addEventListener("click", ()=> {
+    window.location.href = "index.html";
+});
 

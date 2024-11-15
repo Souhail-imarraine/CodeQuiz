@@ -44,7 +44,6 @@
         </div>
     </section>
     <section>
-        
         <div>
             <div class="filter">
                 <select id="filterId" onchange="filterage()">
@@ -55,60 +54,21 @@
                 </select>
             </div>
             <div class="game_container">
-
                 <div class="container-game_one">
-                    <div class="card_quiz" data-level="Facile"> 
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 1</h1>
-                        <p class="timeAQuiz">5min</p>
+                    <div class="card_quiz" data-level="Facile" > 
+                        <button class="btn_star" data-categorie="it">play now</button>
+                        <div>
+                            <p class="description">est your knowledge on a variety of topics with this introductory quiz! Perfect for beginners, this quiz covers general knowledge questions that will challenge your understanding of history, science, culture, and more. Dive in to see how much you know and learn new facts along the way!</p>
+                        </div>
+                        <div style="display: flex; width: 100%; justify-content: space-around; align-items: center;">
+                            <p class="class">5min</p>
+                            <i class="fa-solid fa-hourglass-start" style="color: #ffe600; font-size: xx-large;"></i>                        
+                        </div>
                         <div class="Niveau_difficulte">
-                            <h1 >Facille</h1>
+                            <h1 class="titre_quize">Titre de quize</h1>
                         </div>
                     </div>
-                    <div class="card_quiz" data-level="Moyen">
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 2</h1>
-                        <p class="timeAQuiz">10min</p>
-                        <div class="Niveau_difficulte">
-                            <h1>Moyen</h1>
-                        </div>
-                    </div>
-                    <div class="card_quiz" data-level="Difficile">
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 3</h1>
-                        <p class="timeAQuiz">20min</p>
-                        <div class="Niveau_difficulte">
-                            <h1>Difficile</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container_game_two">
-                    <div class="card_quiz" data-level="Facile">
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 3</h1>
-                        <p>20min</p>
-                        <div class="Niveau_difficulte">
-                            <h1>Facille</h1>
-                        </div>
-                    </div>
-                    <div class="card_quiz" data-level="Moyen">
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 3</h1>
-                        <p>20min</p>
-                        <div class="Niveau_difficulte">
-                            <h1>Moyen</h1>
-                        </div>
-                    </div>
-                    <div class="card_quiz" data-level="Difficile">
-                        <button class="btn_star">play now</button>
-                        <h1>QUIZE 4</h1>
-                        <p>3min</p>
-                        <div class="Niveau_difficulte">
-                            <h1>Difficile</h1>
-                        </div>
-                    </div>
-                </div> 
+                </div>1
 
             </div>
         </div>
@@ -133,7 +93,6 @@
         </div>
     </footer>
     <script src="data_Quizes.js"></script>
-    <script src="Quiz.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

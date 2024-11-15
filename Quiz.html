@@ -19,7 +19,7 @@
                 <li><a href="Dashboard.html">Dashboard</a></li>
             </ul>
             <div>
-                <i class="fa-solid fa-sun dark" style="color: #ffbb00;"  id="toggleDark"></i> 
+                <i class="fa-solid fa-sun dark" style="color: #ffbb00;" id="toggleDark"></i> 
             </div>
         </nav>
     </header>
@@ -34,7 +34,7 @@
                     <p class="timing"></p>
                 </div>
                 <div class="Question">
-                    <h3 class="QuizJson">Quel langage est principalement utilisé pour le développement d'applications web côté serveur ?</h3>
+                    <h3 class="QuizJson"></h3>
                 </div>
                 <div class="progress_prent" >
                     <div class="porsontage_color"style="width: 0%; background: red;">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div>
-                <h3 class="true_answore">the answore is ["bla" or "bla", "bla", "souhail"]</h3>
+                <h3 id="explication"></h3>
             </div>
             <div class="answor_container">
                 <!-- <button class="answor"></button>
@@ -72,7 +72,10 @@
                     <h2>Temps total</h2>
                     <h3 class="TempsTotal">2min : 30s</h3>
                 </div>
-                <button class="btn_modul">Save</button>
+                <div>
+                    <button class="btn_modul" id="back_btn">back</button>
+                    <button class="btn_modul" id="play_again">play again</button>
+                </div>
             </div>
         </div>
     </section>
@@ -96,6 +99,5 @@
 
     <script src="data_Quizes.js"></script>
     <script src="Quiz.js"></script>
-    <script src="main.js"></script>
 </body>
 </html>

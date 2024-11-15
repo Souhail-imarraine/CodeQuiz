@@ -1,79 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gestion des Quiz</title>
 </head>
 <body>
-    <header>
-        <nav class="nav">
-            <div>
-                <img src="images/quiz-2074324_1280.png" alt="">
-            </div>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="Quiz.html">Quiz</a></li>
-                <li><a href="Dashboard.html">Dashboard</a></li>
-            </ul>
-            <div>
-                <i class="fa-solid fa-sun dark" style="color: #ffbb00;"  id="toggleDark"></i> 
-            </div>
-        </nav>
-    </header>
     <section>
         <div class="container_one">
             <div>
-                <img src="images/images.jpg" alt="">
+                <img src="images/images.jpg" alt="User Profile" />
             </div>
-            <hr>
+            <hr />
             <div>
-                <button>Gestion des Quiz</button>
-                <button>Création de Questions</button>
+                <button><i class="fa-solid fa-gamepad fa-shake"></i> Gestion des Quiz</button>
+                <!-- <button>Création de Questions</button> -->
                 <button>Statistiques</button>
             </div>
         </div>
         <div class="container_two">
-            <button>ADD QUIZES</button> 
-                <div class="table-container">  
-                    <table>  
-                        <thead>  
-                            <tr>  
-                                <th>Image</th>  
-                                <th>Niveau</th>  
-                                <th>Time</th>  
-                                <th>Question</th>  
-                                <th>Modification</th>  
-                            </tr>  
-                        </thead>  
-                        <tbody>  
-                            <tr>  
-                                <td><img src="images/344201-PAOSF6-481.jpg" alt="Facilitator Image"></td>  
-                                <td>Facile</td>  
-                                <td>2min 30s</td>  
-                                <td>0/10</td>  
-                                <td><button>Edit</button></td>  
-                            </tr>  
-                            <tr>  
-                                <td><img src="images/344201-PAOSF6-481.jpg" alt="Facilitator Image"></td>  
-                                <td>John Doe</td>  
-                                <td>10:00 AM</td>  
-                                <td>What is the agenda?</td>  
-                                <td><button>Edit</button></td>  
-                            </tr>  
-                            <tr>  
-                                <td><img src="images/344201-PAOSF6-481.jpg" alt="Facilitator Image"></td>  
-                                <td>John Doe</td>  
-                                <td>10:00 AM</td>  
-                                <td>What is the agenda?</td>  
-                                <td><button>Edit</button></td>  
-                            </tr>  
-                        </tbody>  
-                    </table>  
-                </div>  
-            
+            <button id="ajouter">ADD QUIZES</button>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Niveau</th>
+                            <th>Time</th>
+                            <th>Question</th>
+                            <th>Modification</th>
+                        </tr>
+                    </thead>
+                    <tbody id="container_tbody">
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
+    <script>
+      const btnAjouter = document.getElementById("ajouter") ;
+
+
+      btnAjouter.addEventListener("click", ()=> {
+          window.location.href = "page_ajouter.html"
+      });
+
+    </script>
+    <script src="dash.js"></script>
+   
 </body>
 </html>

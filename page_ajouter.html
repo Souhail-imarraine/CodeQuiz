@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Création/Édition de Quiz</title>
+  <link rel="stylesheet" href="css/quiz-form.css">
+</head>
+<body>
+  <div class="quiz-form-container">
+    <h1>Création/Édition de Quiz</h1>
+    <form action="#" name="addQuizes">
+      <label for="quiz-title">Titre du quiz</label>
+      <input type="text" id="quiz-title" name="title" required>
+      
+      <label for="quiz-category">Catégorie/Thème</label>
+      <input type="text" id="quiz-category" name="quizCategory" required>
+
+      <label for="difficulty-level">Niveau de difficulté</label>
+      <select id="difficulty-level" name="difficultyLevel" >
+        <option value="Facile">Facile</option>
+        <option value="Moyen">Moyen</option>
+        <option value="Difficile">Difficile</option>
+      </select>
+
+      <label for="time-per-question">Temps par question (en secondes)</label>
+      <input type="number" id="time-per-question" name="timePerQuestion" min="5" required>
+
+      <label for="points-per-question">Points par question</label>
+      <input type="number" id="points-per-question" name="pointsPerQuestion" min="1" required>
+
+    <button id="btn_Enregistrer">Enregistrer le quiz</button>
+    </form>
+  </div>
+
+  <script src="dash.js"></script>
+</body>
+</html> 
