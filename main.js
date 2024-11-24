@@ -1,35 +1,3 @@
-const quizInfo = [
-  {
-    id : 1,
-    level: "Facile",
-    category: "it",
-    description: "Test your knowledge on a variety of topics...",
-    duration: "5min",
-    quizTitle: "Titre de quize",
-  },
-  {
-    id : 2,
-    level: "Facile",
-    category: "General",
-    description: "Test your knowledge on a variety of topics...",
-    duration: "5min",
-    quizTitle: "Titre de quize",
-  },
-  {
-    id : 3,
-    level: "Facile",
-    category: "culture",
-    description: "Test your knowledge on a variety of topics...",
-    duration: "5min",
-    quizTitle: "Titre de quize",
-  }
-];
-
-localStorage.setItem("quizInfo", JSON.stringify(quizInfo));
-
-
-
-
 
 const iconDark = document.querySelector("#toggleDark");
 const body = document.querySelector("body");
@@ -87,15 +55,7 @@ function filterage() {
   });
 }
 
-//  click card
 
-const btnStar = document.querySelectorAll(".btn_star");
-btnStar.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    window.location.href = "/Quiz.html";
-    btn.classList.add("active");
-  });
-});
 
 // fonction check Niveau de difficulté :
 function getAllNiveaux() {
@@ -128,3 +88,35 @@ if(card_quiz) {
 
 
 
+//  add quizes in my dashboard
+
+const gameContauner = document.querySelector(".container-game_one");
+const MyQuizesDash = JSON.parse(localStorage.getItem("quizInfo")) || [];
+
+MyQuizesDash.forEach((quiz)=> {
+  gameContauner.innerHTML += `
+                    <div class="card_quiz" data-level="Facile" > 
+                        <button class="btn_star" data-categorie="${quiz.category}">play now</button>
+                        <div>
+                            <p class="description">est your knowledge on a variety of topics with this introductory quiz! Perfect for beginners, this quiz covers general knowledge questions that will challenge your understanding of history, science, culture, and more. Dive in to see how much you know and learn new facts along the way!</p>
+                        </div>
+                        <div style="display: flex; width: 100%; justify-content: space-around; align-items: center;">
+                            <p class="class">${quiz.duration}min</p>
+                            <i class="fa-solid fa-hourglass-start" style="color: #ffe600; font-size: xx-large;"></i>                        
+                        </div>
+                        <div class="Niveau_difficulte">
+                            <h1 class="titre_quize">${quiz.quizTitle}</h1>
+                        </div>
+                    </div>
+    `
+})
+
+//  click card
+
+const btnStar = document.querySelectorAll(".btn_star");
+btnStar.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    window.location.href = "/Quiz.html";
+    btn.classList.add("active");
+  });
+});
