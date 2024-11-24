@@ -150,16 +150,17 @@ count();
 
 
 // timing 30s
+let tempTime = 0;
 
 function timing() {
-    let seconds = 20;  
+    let seconds = 30;  
     let timingElement = document.querySelector('.timing');
    
-
     let deley = setInterval(() => {
         if (seconds >= 0) {
             timingElement.innerHTML = `${Math.floor(seconds / 60)}min : ${seconds % 60}s`;
             seconds--; 
+            tempTime++;
         }
 
         if (seconds < 0) {
@@ -167,18 +168,16 @@ function timing() {
             timingElement.innerHTML = "Time's up!";
             handleAnswerClick(null);
             nextQuize();
+            tempTotalQuize(); // Call tempTotalQuize after the quiz ends
         }
     }, 1000);
 }
 
 timing();
 
-
-
-
-
 // ******************************* score *****************************
-let myscore =  localStorage.getItem("score");
+let myscore = localStorage.getItem("score");
+
 function scoreQuizes() {
     let nomber_bonne_reponse = document.querySelector(".nomber_bonne_reponse"); 
     nomber_bonne_reponse.innerHTML = `${myscore}/${dataQuizeJs.length}`;
@@ -186,23 +185,22 @@ function scoreQuizes() {
 }
 scoreQuizes();
 
-//  Pourcentage 
+//  Pourcentage
 let pourcentage = document.querySelector(".pourcentage"); 
 
- function pourcentageQuize() {
+function pourcentageQuize() {
     let lenghtQuizes = dataQuizeJs.length; 
-    pourcentage.innerHTML = (myscore/lenghtQuizes)*100 + "%";
+    pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
     window.localStorage.setItem("pourcentage", pourcentage.innerHTML);
- }
- pourcentageQuize();
+}
+pourcentageQuize();
 
-//  tempt total
+//  Total Time
+function tempTotalQuize() {
+    const TempsTotal = document.querySelector(".TempsTotal");
+    TempsTotal.textContent = `Total Time: ${Math.floor(tempTime / 60)}min : ${tempTime % 60}s`;
+}
 
-// function tempTotalQuize(){
-//     const TempsTotal = document.querySelector(".TempsTotal");
-//     // TempTotal.innerHTML = 
-//     //**her i want to write my code*/
-// }
 
 // ********************************************************************
 
@@ -215,6 +213,7 @@ playAgain.addEventListener("click", () => {
     
     score = 0;
     currentQuestionIndex = 0;
+    tempTime = 0 ;
 
     localStorage.setItem("score", score);
 
@@ -231,6 +230,7 @@ playAgain.addEventListener("click", () => {
     count();
     updateQuestion();
     pourcentageQuize();
+    tempTotalQuize()
 });
 
 
