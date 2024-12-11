@@ -6,7 +6,6 @@ let currentQuestionIndex = 0;
 
 let score = 0;
 
-
 let dataQuizeJs = JSON.parse(localStorage.getItem("quizData")) || [];
 
 
@@ -81,8 +80,7 @@ function handleAnswerClick(event) {
         document.querySelector(".modal-container").style.display = "flex";
         // document.querySelector(".container_quizes").innerHTML = "";
         document.querySelector(".container_quizes").style.minHeight = "710px";
-
-    }else {
+    } else {
     
     let answerButtons = document.querySelectorAll('.answor');
     let selectedButton = event.target;
@@ -150,16 +148,17 @@ count();
 
 
 // timing 30s
+let tempTime = 0;
 
 function timing() {
-    let seconds = 20;  
+    let seconds = 60;  
     let timingElement = document.querySelector('.timing');
    
-
     let deley = setInterval(() => {
         if (seconds >= 0) {
             timingElement.innerHTML = `${Math.floor(seconds / 60)}min : ${seconds % 60}s`;
             seconds--; 
+            tempTime++;
         }
 
         if (seconds < 0) {
@@ -167,18 +166,16 @@ function timing() {
             timingElement.innerHTML = "Time's up!";
             handleAnswerClick(null);
             nextQuize();
+            tempTotalQuize(); 
         }
     }, 1000);
 }
 
 timing();
 
-
-
-
-
 // ******************************* score *****************************
-let myscore =  localStorage.getItem("score");
+let myscore = localStorage.getItem("score");
+
 function scoreQuizes() {
     let nomber_bonne_reponse = document.querySelector(".nomber_bonne_reponse"); 
     nomber_bonne_reponse.innerHTML = `${myscore}/${dataQuizeJs.length}`;
@@ -186,23 +183,23 @@ function scoreQuizes() {
 }
 scoreQuizes();
 
-//  Pourcentage 
+//  Pourcentage
 let pourcentage = document.querySelector(".pourcentage"); 
-
- function pourcentageQuize() {
+function pourcentageQuize() {
     let lenghtQuizes = dataQuizeJs.length; 
-    pourcentage.innerHTML = (myscore/lenghtQuizes)*100 + "%";
+    pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
     window.localStorage.setItem("pourcentage", pourcentage.innerHTML);
- }
- pourcentageQuize();
+}
+pourcentageQuize();
 
-//  tempt total
 
-// function tempTotalQuize(){
-//     const TempsTotal = document.querySelector(".TempsTotal");
-//     // TempTotal.innerHTML = 
-//     //**her i want to write my code*/
-// }
+
+//  Total Time
+function tempTotalQuize() {
+    const TempsTotal = document.querySelector(".TempsTotal");
+    TempsTotal.textContent = `Total Time: ${Math.floor(tempTime / 60)}min : ${tempTime % 60}s`;
+}
+
 
 // ********************************************************************
 
@@ -215,6 +212,7 @@ playAgain.addEventListener("click", () => {
     
     score = 0;
     currentQuestionIndex = 0;
+    tempTime = 0 ;
 
     localStorage.setItem("score", score);
 
@@ -227,10 +225,11 @@ playAgain.addEventListener("click", () => {
         return;
     }
 
-    timing();
     count();
     updateQuestion();
     pourcentageQuize();
+    tempTotalQuize()
+    timing();
 });
 
 

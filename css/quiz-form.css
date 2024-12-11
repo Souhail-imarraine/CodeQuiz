@@ -69,3 +69,26 @@
     color: white;
   }
   
+
+  .type_vraiFaux {
+    display: flex;
+    justify-content: center;
+  }
+
+  .true-ansower{
+    background-color: #00ff40b1;
+    color: black;
+
+  }
+
+  .faux-ansowers{
+    background-color: rgba(255, 0, 0, 0.474);
+    color: rgb(0, 0, 0);
+  }
+  .vrais {
+    background-color: #00ff40b1;
+  }
+
+  .fauxs {
+    background-color: rgba(255, 0, 0, 0.474);
+  }

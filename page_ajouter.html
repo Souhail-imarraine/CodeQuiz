@@ -9,30 +9,40 @@
 <body>
   <div class="quiz-form-container">
     <h1>Création/Édition de Quiz</h1>
-    <form action="#" name="addQuizes">
-      <label for="quiz-title">Titre du quiz</label>
-      <input type="text" id="quiz-title" name="title" required>
-      
-      <label for="quiz-category">Catégorie/Thème</label>
-      <input type="text" id="quiz-category" name="quizCategory" required>
+    <form name="addQuizes">
+      <label for="quizCategory">Catégorie du quiz</label>
+      <select name="quizCategory" id="quizCategory">
+        <option value="it">IT</option>
+        <option value="general">Général</option>
+        <option value="culture">Culture</option>
+      </select>
 
       <label for="difficulty-level">Niveau de difficulté</label>
-      <select id="difficulty-level" name="difficultyLevel" >
+      <select id="difficulty-level" name="difficultyLevel">
         <option value="Facile">Facile</option>
         <option value="Moyen">Moyen</option>
         <option value="Difficile">Difficile</option>
       </select>
 
-      <label for="time-per-question">Temps par question (en secondes)</label>
-      <input type="number" id="time-per-question" name="timePerQuestion" min="5" required>
+      <label for="type_quize">Type de quiz</label>
+      <select id="type_quize" name="type_quize">
+        <option value="QCM">QCM</option>
+        <option value="text">Text</option>
+        <option value="VraitFaux">Vrai/Faux</option>
+      </select>
+      
+      <label for="points-per-question">Ajouter Question</label>
+      <input type="text" name="Quize" placeholder="Question">
 
-      <label for="points-per-question">Points par question</label>
-      <input type="number" id="points-per-question" name="pointsPerQuestion" min="1" required>
+      <div class="container_type">
 
-    <button id="btn_Enregistrer">Enregistrer le quiz</button>
+
+      </div>
+
+      <button id="btn_Enregistrer">Enregistrer le quiz</button>
     </form>
   </div>
 
   <script src="dash.js"></script>
 </body>
-</html> 
+</html>

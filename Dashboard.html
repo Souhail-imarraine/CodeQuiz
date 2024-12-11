@@ -16,8 +16,7 @@
             <hr />
             <div>
                 <button><i class="fa-solid fa-gamepad fa-shake"></i> Gestion des Quiz</button>
-                <!-- <button>Création de Questions</button> -->
-                <button>Statistiques</button>
+                <button id="statique">Statistiques</button>
             </div>
         </div>
         <div class="container_two">
@@ -29,9 +28,7 @@
                             <th>Id</th>
                             <th>Titre</th>
                             <th>Niveau</th>
-                            <th>Time</th>
                             <th>Question</th>
-                            <th>Modification</th>
                         </tr>
                     </thead>
                     <tbody id="container_tbody">
@@ -41,16 +38,54 @@
             </div>
         </div>
     </section>
+    
     <script>
-      const btnAjouter = document.getElementById("ajouter") ;
+      const btnAjouter = document.getElementById("ajouter");
 
-
-      btnAjouter.addEventListener("click", ()=> {
-          window.location.href = "./page_ajouter.html"
+      btnAjouter.addEventListener("click", () => {
+          window.location.href = "./page_ajouter.html";
       });
 
+      document.addEventListener("DOMContentLoaded", () => {
+          afficherQuize();
+      });
+
+      function afficherQuize() {
+          const quizeData = JSON.parse(localStorage.getItem("data")) || [];
+          const containerTbody = document.querySelector("#container_tbody");
+
+          containerTbody.innerHTML = "";
+
+          for (let category in quizeData) {
+              quizeData[category].forEach((quiz, index) => {
+                  const row = document.createElement("tr");
+                  row.innerHTML = `
+                      <td>${index + 1}</td>
+                      <td>${quiz.question}</td>
+                      <td>${quiz.type}</td>
+                      <td>${quiz.niveau}</td>
+                      <td>${quiz.options.map(option => option.text).join(", ")}</td>
+                      <td>
+                          <button class="action-btn edit-btn" onclick="editQuiz('${category}', ${index})">Edit</button>
+                          <button class="action-btn delete-btn" onclick="deleteQuiz('${category}', ${index})">Delete</button>
+                      </td>`;
+                  containerTbody.appendChild(row);
+              });
+          }
+      }
+
+      function editQuiz(category, index) {
+          // Add your edit functionality here
+          console.log(`Edit quiz in category: ${category}, index: ${index}`);
+      }
+
+      function deleteQuiz(category, index) {
+          let quizeData = JSON.parse(localStorage.getItem("data")) || [];
+          quizeData[category].splice(index, 1);
+          localStorage.setItem("data", JSON.stringify(quizeData));
+          afficherQuize();
+      }
     </script>
     <script src="dash.js"></script>
-   
 </body>
 </html>

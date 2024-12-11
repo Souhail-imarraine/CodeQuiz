@@ -1,82 +1,153 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const tbody = document.getElementById("container_tbody");
+let data = JSON.parse(localStorage.getItem("data")) || [];
+console.log(data);
 
-    const quizData = JSON.parse(localStorage.getItem("quizInfo")) || [];
+let myForm = document.forms.addQuizes;
+let typeQuize = myForm.type_quize;
+let container = document.querySelector(".container_type");
 
-    if (tbody) {
-        quizData.forEach(quiz => {
-            const row = document.createElement("tr");
+document.addEventListener("DOMContentLoaded", () => {
+    const myForm = document.forms.addQuizes;
+    const typeQuize = myForm.type_quize;
+    const container = document.querySelector(".container_type");
 
-            row.innerHTML = `
-                <td>${quiz.id}</td>
-                <td>${quiz.quizTitle}</td>
-                <td>${quiz.level}</td>
-                <td>${quiz.duration}</td>
-                <td>${quiz.category}</td>
-                <td>
-                    <button class="action-btn edit-btn" onclick="editQuiz(${quiz.id})">Edit</button>
-                    <button class="action-btn delete-btn" onclick="deleteQuiz(${quiz.id})">Delete</button>
-                </td>
-            `;
-            tbody.appendChild(row);
-        });
-    }
+    typeQuize.addEventListener("change", () => {
+        const valueType = typeQuize.value;
+        container.innerHTML = "";
 
-    const registerForm = document.forms.addQuizes;
-    const btnEnregistrer = document.getElementById("btn_Enregistrer");
+        if (valueType === "QCM") {
+            container.innerHTML = `
+        <div class="type_Qcm">
+          <label for="points-per-question">Ajouter Réponses</label>
+          <input type="text" name="Reponses" id="true" class="true-ansower" placeholder="True Answer">
+          <input type="text" name="Reponses" id="false1" class="faux-ansowers" placeholder="False Answer 1">
+          <input type="text" name="Reponses" id="false2" class="faux-ansowers" placeholder="False Answer 2">
+          <input type="text" name="Reponses" id="false3" class="faux-ansowers" placeholder="False Answer 3">
+        </div>`;
+        } else if (valueType === "text") {
+            container.innerHTML = `
+        <div class="type_text">
+          <label for="points-per-question">Ajouter Réponses</label>
+          <input type="text" name="ReponsesText" class="true-ansower" placeholder="True Answer">
+        </div>`;
+        } else {
+            container.innerHTML = `
+        <div class="type_vraiFaux">
+          <div>
+            <select id="vraiFaux" name="vraiCorrect" class="vrais">
+              <option value="vrai">Vrai</option>
+              <option value="faux">Faux</option>
+            </select>
+          </div>
+          <div>
+            <select id="vraiFaux" name="FauxinCorrect" class="fauxs">
+              <option value="vrai">Vrai</option>
+              <option value="faux">Faux</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="explication">Explication</label>
+          <input type="text" name="explication" class="true-ansower" placeholder="Explication">
+        </div>`;
+        }
+    });
 
-    if (btnEnregistrer) {
-        btnEnregistrer.addEventListener("click", () => {
-            const title = registerForm.title.value;
-            const quizCategory = registerForm.quizCategory.value;
-            const difficultyLevel = registerForm.difficultyLevel.value;
-            const timePerQuestion = registerForm.timePerQuestion.value;
+    document.querySelector("#btn_Enregistrer").addEventListener("click", function (e) {
+        e.preventDefault();
+        let datta = JSON.parse(localStorage.getItem("data")) || [];
+        let difficultyLevel = myForm.difficultyLevel.value;
+        let type_quize = myForm.type_quize.value;
+        let Quize = myForm.Quize.value;
+        let quizCategory = myForm.quizCategory.value;
 
-            const idCount = quizData.length > 0 ? quizData[quizData.length - 1].id + 1 : 1;
+        let dataa;
 
-            const newQuiz = {
-                id: idCount,
-                level: difficultyLevel,
-                category: quizCategory,
-                duration: timePerQuestion,
-                quizTitle: title
-            };
+        switch (type_quize) {
+            case "QCM":
+                dataa = {
+                    type: type_quize,
+                    niveau: difficultyLevel,
+                    question: Quize,
+                    options: [
+                        { text: document.querySelector("#false1").value, correct: false },
+                        { text: document.querySelector("#false2").value, correct: false },
+                        { text: document.querySelector("#true").value, correct: true },
+                        { text: document.querySelector("#false3").value, correct: false }
+                    ]
+                };
+                break;
 
-            quizData.push(newQuiz);
+            case "text":
+                let ReponsesText = myForm.ReponsesText.value;
+                dataa = {
+                    type: type_quize,
+                    niveau: difficultyLevel,
+                    question: Quize,
+                    options: [ReponsesText]
+                };
+                break;
 
-            localStorage.setItem("quizInfo", JSON.stringify(quizData));
-            window.location.href = "Dashboard.html"
-        });
-    }
+            case "VraitFaux":
+                let correctAnsowerTrue = myForm.vraiCorrect.value;
+                let correctAnsowerFalse = myForm.FauxinCorrect.value;
+                let explication = myForm.explication.value;
+                dataa = {
+                    type: type_quize,
+                    niveau: difficultyLevel,
+                    question: Quize,
+                    options: [
+                        { text: correctAnsowerTrue, correct: true },
+                        { text: correctAnsowerFalse, correct: false }
+                    ],
+                    explication: explication
+                };
+                break;
+
+            default:
+                break;
+        }
+
+        datta[quizCategory].push(dataa);
+        localStorage.setItem("data", JSON.stringify(datta));
+        window.location.href = "Dashboard.html";
+    });
 });
 
+function afficherQuize() {
+    let quizeData = JSON.parse(localStorage.getItem("data")) || [];
+    let containerTbody = document.querySelector("#container_tbody");
 
-function editQuiz(id) {
-    const quizData = JSON.parse(localStorage.getItem("quizInfo")) || [];
-    const quizToEdit = quizData.find(quiz => quiz.id === id);
+    containerTbody.innerHTML = "";
 
-    if (quizToEdit) {
-      document.getElementById("quiz-title").value = quizToEdit.quizTitle;
-      document.getElementById("quiz-category").value = quizToEdit.category;
-      document.getElementById("difficulty-level").value = quizToEdit.level;
-      document.getElementById("time-per-question").value = quizToEdit.duration;
-      document.getElementById("points-per-question").value = quizToEdit.pointsPerQuestion;
-
-      localStorage.setItem("currentQuizId", id);
-
-      console.log("Editing quiz with ID:", id);
+    for (let category in quizeData) {
+        quizeData[category].forEach((quiz, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${quiz.question}</td>
+                <td>${quiz.type}</td>
+                <td>${quiz.niveau}</td>
+                <td>${quiz.options.map(option => option.text).join(", ")}</td>
+                <td>
+                    <button class="action-btn edit-btn" onclick="editQuiz('${category}', ${index})">Edit</button>
+                    <button class="action-btn delete-btn" onclick="deleteQuiz('${category}', ${index})">Delete</button>
+                </td>`;
+            containerTbody.appendChild(row);
+        });
     }
-  }
-
-function deleteQuiz(id) {
-    let quizInfo = JSON.parse(localStorage.getItem("quizInfo")) || [];
-
-    quizInfo = quizInfo.filter(quiz => quiz.id !== id);
-    localStorage.setItem("quizInfo", JSON.stringify(quizInfo));
-
-    location.reload();
-
-    console.log("Quiz deleted successfully!");
 }
 
+function editQuiz(category, index) {
+    console.log(`Edit quiz in category: ${category}, index: ${index}`);
+}
 
+function deleteQuiz(category, index) {
+    let quizeData = JSON.parse(localStorage.getItem("data")) || [];
+    quizeData[category].splice(index, 1);
+    localStorage.setItem("data", JSON.stringify(quizeData));
+    afficherQuize();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    afficherQuize();
+});
