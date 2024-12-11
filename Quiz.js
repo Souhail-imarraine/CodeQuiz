@@ -149,7 +149,6 @@ count();
 
 // timing 30s
 let tempTime = 0;
-let tempTime = 0;
 
 function timing() {
     let seconds = 60;  
@@ -177,7 +176,7 @@ function timing() {
 timing();
 
 // ******************************* score *****************************
-let myscore = localStorage.getItem("score");
+
 
 let myscore = localStorage.getItem("score");
 
@@ -196,8 +195,6 @@ function pourcentageQuize() {
     pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
     pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
     window.localStorage.setItem("pourcentage", pourcentage.innerHTML);
-}
-pourcentageQuize();
 }
 pourcentageQuize();
 
