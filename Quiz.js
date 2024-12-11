@@ -149,15 +149,18 @@ count();
 
 // timing 30s
 let tempTime = 0;
+let tempTime = 0;
 
 function timing() {
     let seconds = 60;  
     let timingElement = document.querySelector('.timing');
    
+   
     let deley = setInterval(() => {
         if (seconds >= 0) {
             timingElement.innerHTML = `${Math.floor(seconds / 60)}min : ${seconds % 60}s`;
             seconds--; 
+            tempTime++;
             tempTime++;
         }
 
@@ -176,6 +179,8 @@ timing();
 // ******************************* score *****************************
 let myscore = localStorage.getItem("score");
 
+let myscore = localStorage.getItem("score");
+
 function scoreQuizes() {
     let nomber_bonne_reponse = document.querySelector(".nomber_bonne_reponse"); 
     nomber_bonne_reponse.innerHTML = `${myscore}/${dataQuizeJs.length}`;
@@ -184,11 +189,15 @@ function scoreQuizes() {
 scoreQuizes();
 
 //  Pourcentage
+//  Pourcentage
 let pourcentage = document.querySelector(".pourcentage"); 
 function pourcentageQuize() {
     let lenghtQuizes = dataQuizeJs.length; 
     pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
+    pourcentage.innerHTML = (myscore / lenghtQuizes) * 100 + "%";
     window.localStorage.setItem("pourcentage", pourcentage.innerHTML);
+}
+pourcentageQuize();
 }
 pourcentageQuize();
 
@@ -212,6 +221,7 @@ playAgain.addEventListener("click", () => {
     
     score = 0;
     currentQuestionIndex = 0;
+    tempTime = 0 ;
     tempTime = 0 ;
 
     localStorage.setItem("score", score);
